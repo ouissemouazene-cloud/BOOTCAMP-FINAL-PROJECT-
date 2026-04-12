@@ -1,0 +1,15 @@
+{
+  "part_name": "Vanne Industrielle DN100 PN40",
+  "part_id": "VLV-DN100-PN40-316L",
+  "diameter_mm": 100,
+  "pressure_bar": 40,
+  "material": "Inox 316L",
+  "weight_kg": 12.5,
+  "tolerance_mm": 0.05,
+  "temperature_max_celsius": 200,
+  "temperature_min_celsius": -10,
+  "flow_rate_m3h": 85,
+  "lifespan_years_expected": 15,
+  "vibration_limit_mm_s": 4.5,
+  "maintenance_interval_months": 6
+}

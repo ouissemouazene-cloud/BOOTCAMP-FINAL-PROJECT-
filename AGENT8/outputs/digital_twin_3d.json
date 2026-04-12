@@ -1,0 +1,284 @@
+{
+  "renderer": "threejs",
+  "version": "r128",
+  "generated_at": "2026-04-12T11:28:32.350855",
+  "datasets_used": [
+    "NASA CMAPSS train_FD001.txt (data.nasa.gov)",
+    "pump_sensor.csv (Kaggle — nphantawee)",
+    "ai4i2020.csv   (Kaggle — stephanmatzka)"
+  ],
+  "scene": {
+    "background": "#0F172A",
+    "fog": {
+      "color": "#0F172A",
+      "near": 10,
+      "far": 1000
+    }
+  },
+  "camera": {
+    "type": "PerspectiveCamera",
+    "fov": 75,
+    "position": {
+      "x": 200,
+      "y": 150,
+      "z": 300
+    },
+    "lookAt": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "lights": [
+    {
+      "type": "AmbientLight",
+      "color": "#ffffff",
+      "intensity": 0.4
+    },
+    {
+      "type": "DirectionalLight",
+      "color": "#ffffff",
+      "intensity": 0.8,
+      "position": {
+        "x": 100,
+        "y": 200,
+        "z": 100
+      }
+    }
+  ],
+  "objects": [
+    {
+      "id": "valve_body",
+      "type": "CylinderGeometry",
+      "params": {
+        "radiusTop": 50,
+        "radiusBottom": 50,
+        "height": 250,
+        "segments": 32
+      },
+      "material": {
+        "type": "MeshPhongMaterial",
+        "color": "#7F1D1D",
+        "shininess": 100,
+        "opacity": 0.9
+      },
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "animation": {
+        "type": "rotation",
+        "axis": "y",
+        "speed": 0.005,
+        "loop": true
+      }
+    },
+    {
+      "id": "valve_flange_top",
+      "type": "CylinderGeometry",
+      "params": {
+        "radiusTop": 70,
+        "radiusBottom": 70,
+        "height": 20,
+        "segments": 32
+      },
+      "material": {
+        "type": "MeshPhongMaterial",
+        "color": "#94A3B8"
+      },
+      "position": {
+        "x": 0,
+        "y": 135,
+        "z": 0
+      }
+    },
+    {
+      "id": "valve_flange_bottom",
+      "type": "CylinderGeometry",
+      "params": {
+        "radiusTop": 70,
+        "radiusBottom": 70,
+        "height": 20,
+        "segments": 32
+      },
+      "material": {
+        "type": "MeshPhongMaterial",
+        "color": "#94A3B8"
+      },
+      "position": {
+        "x": 0,
+        "y": -135,
+        "z": 0
+      }
+    }
+  ],
+  "health_zones": [
+    {
+      "zone": "body",
+      "health_pct": 22.5,
+      "color_hex": "#7F1D1D",
+      "label": "Critique"
+    },
+    {
+      "zone": "seal",
+      "health_pct": 49.7,
+      "color_hex": "#EF4444",
+      "label": "Joint d'étanchéité"
+    },
+    {
+      "zone": "inlet",
+      "health_pct": 37.2,
+      "color_hex": "#7F1D1D",
+      "label": "Entrée pression"
+    },
+    {
+      "zone": "outlet",
+      "health_pct": 59.8,
+      "color_hex": "#EF4444",
+      "label": "Sortie débit"
+    }
+  ],
+  "sensor_markers": [
+    {
+      "id": "S1",
+      "label": "Température",
+      "position": {
+        "x": 0,
+        "y": 80,
+        "z": 60
+      },
+      "value": 60.3,
+      "unit": "°C",
+      "status": "WARNING",
+      "color": "#EF4444"
+    },
+    {
+      "id": "S2",
+      "label": "Pression",
+      "position": {
+        "x": 70,
+        "y": 0,
+        "z": 0
+      },
+      "value": 45.02,
+      "unit": "bar",
+      "status": "WARNING",
+      "color": "#7F1D1D"
+    },
+    {
+      "id": "S3",
+      "label": "Vibration",
+      "position": {
+        "x": -70,
+        "y": 0,
+        "z": 0
+      },
+      "value": 5.82,
+      "unit": "mm/s",
+      "status": "WARNING",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "S4",
+      "label": "Débit",
+      "position": {
+        "x": 0,
+        "y": -80,
+        "z": 60
+      },
+      "value": 74.9,
+      "unit": "m³/h",
+      "status": "NORMAL",
+      "color": "#EF4444"
+    }
+  ],
+  "rul_curve": [
+    0.995,
+    0.912,
+    0.829,
+    0.746,
+    0.663,
+    0.58,
+    0.497,
+    0.414,
+    0.332,
+    0.249,
+    0.166,
+    0.083
+  ],
+  "timeline": [
+    {
+      "month": 1,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "RNF"
+    },
+    {
+      "month": 2,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 3,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 4,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 5,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 6,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 7,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 8,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 9,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 10,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 11,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    },
+    {
+      "month": 12,
+      "health_score": 0.0,
+      "alert_count": 1,
+      "dominant_failure": "HDF"
+    }
+  ]
+}
