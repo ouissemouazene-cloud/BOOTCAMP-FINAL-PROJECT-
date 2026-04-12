@@ -1,0 +1,11 @@
+{
+    "total_production_cost": 3965000,
+    "unit_cost": 19825.0,
+    "quantity": 200,
+    "breakdown": {
+        "Mati\u00e8res": 765000,
+        "Usinage": 3000000,
+        "\u00c9nergie": 150000,
+        "Logistique": 50000
+    }
+}

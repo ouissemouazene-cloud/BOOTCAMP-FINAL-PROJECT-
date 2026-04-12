@@ -1,0 +1,42 @@
+# --- Core Framework (Industrie IA) ---
+langchain
+langchain-google-genai
+langgraph
+langchain-community
+python-dotenv
+
+# --- Agent 1 : Analyse Technique (PDF/Vision) ---
+pypdf
+pymupdf
+pdfplumber
+pillow
+
+# --- Agent 2 : CAD / BIM ---
+ezdxf
+# ifcopenshell # (Requiert installation spécifique parfois)
+
+# --- Agent 3 : Multimédia & Animation ---
+moviepy
+manim
+
+# --- Agent 4 & 5 : Sourcing & Négociation (Search/TTS) ---
+tavily-python
+gTTS
+elevenlabs
+
+# --- Agent 6 & 7 : Finance & Business (Excel/PDF) ---
+pandas
+openpyxl
+numpy
+matplotlib
+reportlab
+fpdf2
+
+# --- Agent 8 : Jumeau Numérique (Machine Learning) ---
+scikit-learn
+xgboost
+pandas
+
+# --- Agent 9 : Catalogue Final ---
+jinja2
+pdfkit
