@@ -2,6 +2,12 @@
   "simulation_hours": 8760,
   "simulation_period": "2026-01-01 to 2026-12-31",
   "simulation_method": "monte_carlo_pattern_based",
+  "ai_models": {
+    "anomaly_detection": "Autoencoder (PyTorch)",
+    "rul_prediction": "LSTM (PyTorch)",
+    "reasoning": "Mistral (Ollama)",
+    "model_selection": "linear_regression"
+  },
   "datasets_used": [
     "NASA CMAPSS train_FD001.txt (data.nasa.gov)",
     "pump_sensor.csv (Kaggle — nphantawee)",
@@ -12,24 +18,26 @@
   "health_score_high": 25.7,
   "health_status": "Critique",
   "dominant_factor": "critical_events",
+  "llm_health_analysis": "La vanne présente un score de santé de 22.5/100. Statut: Critique. Facteur dominant: critical_events. Surveillance recommandée.",
   "alerts": [
     {
       "month": 1,
       "date": "2026-01-01",
-      "failure_code": "RNF",
-      "type": "random_failure",
-      "sensor": "multiple",
-      "temperature_c": 9.3,
+      "failure_code": "HDF",
+      "type": "heat_dissipation_failure",
+      "sensor": "temperature",
+      "temperature_c": 77.37,
       "pressure_bar": 40.18,
-      "vibration_mms": 2.03,
-      "flow_m3h": 85.52,
-      "value": 2.03,
+      "vibration_mms": 2.28,
+      "flow_m3h": 85.39,
+      "value": 2.28,
       "threshold": 4.5,
       "severity": "critical",
-      "wear_level": 0.003,
-      "rul_remaining": 0.995,
-      "anomaly_score": -0.616,
-      "recommended_action": "Inspection complète immédiate requise"
+      "wear_level": 0.0,
+      "rul_remaining": 0.994,
+      "ae_error": 0.143214,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 2,
@@ -46,8 +54,9 @@
       "severity": "critical",
       "wear_level": 0.1,
       "rul_remaining": 0.91,
-      "anomaly_score": -0.54,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.228521,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 3,
@@ -64,8 +73,9 @@
       "severity": "critical",
       "wear_level": 0.197,
       "rul_remaining": 0.834,
-      "anomaly_score": -0.498,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.207065,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 4,
@@ -82,8 +92,9 @@
       "severity": "critical",
       "wear_level": 0.228,
       "rul_remaining": 0.749,
-      "anomaly_score": -0.511,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.255424,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 5,
@@ -100,8 +111,9 @@
       "severity": "critical",
       "wear_level": 0.32,
       "rul_remaining": 0.667,
-      "anomaly_score": -0.493,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.301428,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 6,
@@ -109,17 +121,18 @@
       "failure_code": "HDF",
       "type": "heat_dissipation_failure",
       "sensor": "temperature",
-      "temperature_c": 90.49,
-      "pressure_bar": 45.21,
-      "vibration_mms": 5.28,
-      "flow_m3h": 76.12,
-      "value": 5.28,
+      "temperature_c": 52.92,
+      "pressure_bar": 45.75,
+      "vibration_mms": 4.88,
+      "flow_m3h": 74.71,
+      "value": 4.88,
       "threshold": 4.5,
       "severity": "critical",
-      "wear_level": 0.429,
+      "wear_level": 0.455,
       "rul_remaining": 0.583,
-      "anomaly_score": -0.451,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.239915,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 7,
@@ -127,17 +140,18 @@
       "failure_code": "HDF",
       "type": "heat_dissipation_failure",
       "sensor": "temperature",
-      "temperature_c": 88.73,
-      "pressure_bar": 44.7,
-      "vibration_mms": 5.33,
-      "flow_m3h": 75.77,
-      "value": 5.33,
+      "temperature_c": 68.15,
+      "pressure_bar": 44.96,
+      "vibration_mms": 4.87,
+      "flow_m3h": 75.9,
+      "value": 4.87,
       "threshold": 4.5,
       "severity": "critical",
-      "wear_level": 0.459,
+      "wear_level": 0.485,
       "rul_remaining": 0.501,
-      "anomaly_score": -0.462,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.20906,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 8,
@@ -145,17 +159,18 @@
       "failure_code": "HDF",
       "type": "heat_dissipation_failure",
       "sensor": "temperature",
-      "temperature_c": 85.9,
-      "pressure_bar": 44.93,
-      "vibration_mms": 6.33,
-      "flow_m3h": 72.98,
-      "value": 6.33,
+      "temperature_c": 62.99,
+      "pressure_bar": 44.71,
+      "vibration_mms": 5.94,
+      "flow_m3h": 73.55,
+      "value": 5.94,
       "threshold": 4.5,
       "severity": "critical",
-      "wear_level": 0.569,
+      "wear_level": 0.585,
       "rul_remaining": 0.417,
-      "anomaly_score": -0.433,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.382589,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 9,
@@ -172,8 +187,9 @@
       "severity": "critical",
       "wear_level": 0.646,
       "rul_remaining": 0.332,
-      "anomaly_score": -0.433,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 0.72697,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 10,
@@ -190,8 +206,9 @@
       "severity": "critical",
       "wear_level": 0.757,
       "rul_remaining": 0.251,
-      "anomaly_score": -0.482,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 1.047821,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 11,
@@ -208,8 +225,9 @@
       "severity": "critical",
       "wear_level": 0.817,
       "rul_remaining": 0.166,
-      "anomaly_score": -0.455,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 1.289386,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     },
     {
       "month": 12,
@@ -226,8 +244,9 @@
       "severity": "critical",
       "wear_level": 0.901,
       "rul_remaining": 0.084,
-      "anomaly_score": -0.482,
-      "recommended_action": "Inspecter système de refroidissement"
+      "ae_error": 1.647346,
+      "recommended_action": "Inspecter système de refroidissement",
+      "action_source": "llm_mistral"
     }
   ],
   "predicted_maintenance_date": "2027-07-01",
@@ -235,6 +254,7 @@
   "estimated_lifespan_years": 0.0,
   "prediction_model": "linear_regression",
   "r2_score": 1.0,
+  "lstm_predictions": null,
   "monthly_health_scores": [
     0.0,
     0.0,
@@ -252,26 +272,32 @@
   "sensor_stats": {
     "avg_temperature_c": 60.26,
     "max_temperature_c": 120.0,
-    "avg_pressure_bar": 45.02,
-    "max_pressure_bar": 50.31,
+    "avg_pressure_bar": 45.03,
+    "max_pressure_bar": 61.37,
     "avg_vibration_mms": 5.82,
     "max_vibration_mms": 10.78,
     "avg_flow_m3h": 74.94,
-    "min_flow_m3h": 62.61,
+    "min_flow_m3h": 58.66,
     "avg_wear_level": 0.503,
     "avg_rul": 0.497,
     "final_rul": 0.0,
     "most_common_failure": "HDF",
-    "anomaly_count": 8719,
-    "critical_events": 4074,
-    "warning_events": 3879,
-    "trend_alerts": 766,
-    "normal_percent": 0.5,
-    "warning_percent": 44.3,
-    "critical_percent": 46.5
+    "anomaly_count": 8671,
+    "critical_events": 6172,
+    "warning_events": 1702,
+    "trend_alerts": 797,
+    "normal_percent": 1.0,
+    "warning_percent": 19.4,
+    "critical_percent": 70.5
   },
   "files_generated": [
     "outputs/digital_twin_data.json",
     "outputs/digital_twin_3d.json"
-  ]
+  ],
+  "llm_validation": {
+    "is_coherent": true,
+    "issues": [],
+    "confidence": 95,
+    "verdict": "Très cohérent"
+  }
 }

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent 8 - Visualisation 3D Jumeau Numérique</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background-color: #0F172A; 
+            color: white; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        #canvas-container { width: 100vw; height: 100vh; }
+        #info { 
+            position: absolute; 
+            top: 20px; 
+            left: 20px; 
+            z-index: 100; 
+            background: rgba(15, 23, 42, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            pointer-events: none;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        h2 { margin-top: 0; color: #38BDF8; font-size: 18px; text-transform: uppercase; letter-spacing: 1px;}
+        p { margin-bottom: 5px; font-size: 14px;}
+        .indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+    </style>
+    <!-- Inclure Three.js via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="info">
+        <h2>Vanne Industrielle - Jumeau Numérique</h2>
+        <div id="status-container">Chargement du modèle...</div>
+    </div>
+    
+    <div id="canvas-container"></div>
+
+    <script>
+        // Initialisation de la scène 3D
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Ajout des contrôles de la caméra (souris)
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Gestion du redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        // Chargement du fichier JSON
+        fetch('digital_twin_3d.json')
+            .then(response => response.json())
+            .then(data => {
+                // Mise à jour de l'UI HTML
+                const healthZone = data.health_zones[0]; // Body de la vanne
+                document.getElementById('status-container').innerHTML = `
+                    <p><span class="indicator" style="background-color: ${healthZone.color_hex};"></span>Statut: <strong>${healthZone.label}</strong></p>
+                    <p>Santé globale: <strong>${healthZone.health_pct}%</strong></p>
+                    <hr style="border-color: #334155; margin: 15px 0;">
+                    <p>Moteurs IA actifs : Autoencoder + LSTM + Mistral</p>
+                `;
+                
+                // Configuration de la scène
+                scene.background = new THREE.Color(data.scene.background);
+                scene.fog = new THREE.Fog(data.scene.fog.color, data.scene.fog.near, data.scene.fog.far);
+
+                // Position de la caméra
+                camera.position.set(data.camera.position.x, data.camera.position.y, data.camera.position.z);
+
+                // Lumières
+                data.lights.forEach(lightData => {
+                    if (lightData.type === 'AmbientLight') {
+                        scene.add(new THREE.AmbientLight(lightData.color, lightData.intensity));
+                    } else if (lightData.type === 'DirectionalLight') {
+                        const light = new THREE.DirectionalLight(lightData.color, lightData.intensity);
+                        light.position.set(lightData.position.x, lightData.position.y, lightData.position.z);
+                        scene.add(light);
+                    }
+                });
+
+                // Construction de la vanne
+                const objectsToAnimate = [];
+                
+                data.objects.forEach(objData => {
+                    let geometry;
+                    if (objData.type === 'CylinderGeometry') {
+                        geometry = new THREE.CylinderGeometry(
+                            objData.params.radiusTop,
+                            objData.params.radiusBottom,
+                            objData.params.height,
+                            objData.params.segments
+                        );
+                    }
+
+                    if (geometry) {
+                        const material = new THREE.MeshPhongMaterial({
+                            color: objData.material.color,
+                            shininess: objData.material.shininess || 30,
+                            transparent: objData.material.opacity < 1,
+                            opacity: objData.material.opacity || 1
+                        });
+
+                        const mesh = new THREE.Mesh(geometry, material);
+                        mesh.position.set(objData.position.x, objData.position.y, objData.position.z);
+                        scene.add(mesh);
+
+                        if (objData.animation) {
+                            objectsToAnimate.push({ mesh: mesh, anim: objData.animation });
+                        }
+                    }
+                });
+
+                // Boucle d'animation
+                function animate() {
+                    requestAnimationFrame(animate);
+                    
+                    // Appliquer les animations JSON
+                    objectsToAnimate.forEach(obj => {
+                        if (obj.anim.type === 'rotation') {
+                            if (obj.anim.axis === 'y') obj.mesh.rotation.y += obj.anim.speed;
+                            if (obj.anim.axis === 'x') obj.mesh.rotation.x += obj.anim.speed;
+                            if (obj.anim.axis === 'z') obj.mesh.rotation.z += obj.anim.speed;
+                        }
+                    });
+
+                    controls.update();
+                    renderer.render(scene, camera);
+                }
+                
+                animate();
+            })
+            .catch(error => {
+                console.error("Erreur Fetch:", error);
+                document.getElementById('status-container').innerHTML = `
+                    <p style="color:#ef4444;">Erreur CORS de chargement du JSON.</p>
+                    <p style="font-size: 12px; color:#94a3b8; max-width:250px;">
+                        Pour des raisons de sécurité du navigateur, vous ne pouvez pas ouvrir ce fichier directement via 'file://'.
+                        Ouvrez un terminal et lancez 'python -m http.server', puis visitez http://localhost:8000/outputs/viewer.html.
+                    </p>
+                `;
+            });
+    </script>
+</body>
+</html>

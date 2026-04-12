@@ -1,11 +1,16 @@
 {
   "renderer": "threejs",
   "version": "r128",
-  "generated_at": "2026-04-12T11:28:32.350855",
+  "generated_at": "2026-04-12T21:22:57.254376",
+  "ai_models_used": [
+    "Autoencoder (PyTorch) — anomaly detection",
+    "LSTM (PyTorch) — RUL prediction",
+    "Mistral (Ollama) — intelligent reasoning"
+  ],
   "datasets_used": [
-    "NASA CMAPSS train_FD001.txt (data.nasa.gov)",
-    "pump_sensor.csv (Kaggle — nphantawee)",
-    "ai4i2020.csv   (Kaggle — stephanmatzka)"
+    "NASA CMAPSS train_FD001.txt",
+    "Kaggle pump_sensor.csv",
+    "Kaggle ai4i2020.csv"
   ],
   "scene": {
     "background": "#0F172A",
@@ -70,8 +75,7 @@
       "animation": {
         "type": "rotation",
         "axis": "y",
-        "speed": 0.005,
-        "loop": true
+        "speed": 0.005
       }
     },
     {
@@ -161,7 +165,7 @@
         "y": 0,
         "z": 0
       },
-      "value": 45.02,
+      "value": 45.03,
       "unit": "bar",
       "status": "WARNING",
       "color": "#7F1D1D"
@@ -212,73 +216,86 @@
       "month": 1,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "RNF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 2,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 3,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 4,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 5,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 6,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 7,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 8,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 9,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 10,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 11,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     },
     {
       "month": 12,
       "health_score": 0.0,
       "alert_count": 1,
-      "dominant_failure": "HDF"
+      "dominant_failure": "HDF",
+      "lstm_rul": null
     }
-  ]
+  ],
+  "3D_visualization_prompt": "3D industrial valve DN100 PN40 showing health score 22.5/100, status: Critique, predicted failure: 2029-01-01, detected 12 maintenance alerts using LSTM + Autoencoder AI models"
 }
