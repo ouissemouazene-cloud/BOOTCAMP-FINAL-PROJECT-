@@ -8,7 +8,6 @@ python-dotenv
 # --- Agent 1 : Analyse Technique (PDF/Vision) ---
 pypdf
 pymupdf
-pdfplumber
 pillow
 
 # --- Agent 2 : CAD / BIM ---
