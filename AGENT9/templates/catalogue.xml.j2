@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IndustrialCatalogue>
+    <GeneratedAt>{{ generated_date }}</GeneratedAt>
+    <Product>
+        <PartID>{{ specs.part_id }}</PartID>
+        <PartName>{{ specs.part_name }}</PartName>
+        <Material>{{ specs.material }}</Material>
+        <Dimensions>
+            <DiameterMM>{{ specs.diameter_mm }}</DiameterMM>
+            <ToleranceMM>{{ specs.tolerance_mm }}</ToleranceMM>
+        </Dimensions>
+    </Product>
+    <Sourcing>
+        <MaterialSearched>{{ sourcing.material_searched }}</MaterialSearched>
+        <SuppliersFound>{{ sourcing.suppliers_found }}</SuppliersFound>
+    </Sourcing>
+    <Negotiation>
+        <Winner>{{ nego.winner }}</Winner>
+        <WinnerCountry>{{ nego.winner_country }}</WinnerCountry>
+        <ContractQuantityKg>{{ nego.contract_quantity_kg }}</ContractQuantityKg>
+        <FinalPricePerKg>{{ nego.final_price_per_kg }}</FinalPricePerKg>
+    </Negotiation>
+    <TCO>
+        <HorizonYears>{{ tco.horizon_years }}</HorizonYears>
+        <InflationAdjustedTotalUSD>{{ tco.inflation_adjusted_total_usd }}</InflationAdjustedTotalUSD>
+    </TCO>
+    <BusinessPlan>
+        <ROIPercent>{{ bp.financials.roi_percent }}</ROIPercent>
+        <BreakEvenMonths>{{ bp.financials.break_even_months }}</BreakEvenMonths>
+    </BusinessPlan>
+    <DigitalTwin>
+        <HealthScoreFinal>{{ twin.health_score_final }}</HealthScoreFinal>
+        <PredictedMaintenanceDate>{{ twin.predicted_maintenance_date }}</PredictedMaintenanceDate>
+    </DigitalTwin>
+</IndustrialCatalogue>

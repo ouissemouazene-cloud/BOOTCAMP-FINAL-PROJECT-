@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<IndustrialCatalogue>
+    <GeneratedAt>2026-04-13 00:41:39</GeneratedAt>
+    <Product>
+        <PartID>VLV-DN100-PN40-316L</PartID>
+        <PartName>Vanne Industrielle DN100 PN40</PartName>
+        <Material>Inox 316L</Material>
+        <Dimensions>
+            <DiameterMM>100.0</DiameterMM>
+            <ToleranceMM>0.05</ToleranceMM>
+        </Dimensions>
+    </Product>
+    <Sourcing>
+        <MaterialSearched>Inox 316L</MaterialSearched>
+        <SuppliersFound>12</SuppliersFound>
+    </Sourcing>
+    <Negotiation>
+        <Winner>AcierPro SARL</Winner>
+        <WinnerCountry>FR</WinnerCountry>
+        <ContractQuantityKg>2500</ContractQuantityKg>
+        <FinalPricePerKg>6.48</FinalPricePerKg>
+    </Negotiation>
+    <TCO>
+        <HorizonYears>10</HorizonYears>
+        <InflationAdjustedTotalUSD>387450.0</InflationAdjustedTotalUSD>
+    </TCO>
+    <BusinessPlan>
+        <ROIPercent>34.2</ROIPercent>
+        <BreakEvenMonths>14</BreakEvenMonths>
+    </BusinessPlan>
+    <DigitalTwin>
+        <HealthScoreFinal>61.5</HealthScoreFinal>
+        <PredictedMaintenanceDate>2026-09-15</PredictedMaintenanceDate>
+    </DigitalTwin>
+</IndustrialCatalogue>
