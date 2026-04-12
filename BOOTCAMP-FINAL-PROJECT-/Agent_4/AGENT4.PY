@@ -27,4 +27,17 @@ class SourcingAgent:
 if __name__ == "__main__":
     mock_state = {"suppliers_data": []}
     agent = SourcingAgent()
-    print(agent.search_suppliers(mock_state))
+    state = agent.search_suppliers(mock_state)
+    
+    print("\nFournisseurs trouvés :")
+    for supplier in state.get("suppliers_data", []):
+        print(f"- {supplier['name']} ({supplier['location']}) : {supplier['item']} - {supplier['price_unit']} {supplier['currency']}")
+        
+    print("\nContenu de state[\"suppliers_data\"] :")
+    json_data = json.dumps(state.get("suppliers_data", []), indent=4, ensure_ascii=False)
+    print(json_data)
+    
+    # Génération du fichier JSON
+    with open("suppliers_data.json", "w", encoding="utf-8") as f:
+        f.write(json_data)
+    print("\n✅ Le fichier 'suppliers_data.json' a été généré avec succès !")

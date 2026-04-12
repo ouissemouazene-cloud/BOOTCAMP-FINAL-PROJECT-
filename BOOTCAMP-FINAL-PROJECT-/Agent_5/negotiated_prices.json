@@ -1,0 +1,20 @@
+{
+    "Alger Steel Works": {
+        "base_price": 4500,
+        "discounted_price": 3825.0,
+        "currency": "DZD",
+        "status": "Negotiated - OK"
+    },
+    "Global Gaskets Intl": {
+        "base_price": 12,
+        "discounted_price": 10.2,
+        "currency": "USD",
+        "status": "Negotiated - OK"
+    },
+    "Standard Fasteners Algérie": {
+        "base_price": 85,
+        "discounted_price": 72.25,
+        "currency": "DZD",
+        "status": "Negotiated - OK"
+    }
+}
