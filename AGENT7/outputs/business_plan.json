@@ -1,9 +1,9 @@
 {
-    "price_u": 24000.0,
-    "total_revenue": 4800000.0,
-    "profit": 800000.0,
+    "price_u": 23484.0,
+    "total_revenue": 4696800.0,
+    "profit": 782800.0,
     "roi": 20.0,
-    "npv": 14939948.18,
-    "breakeven": 801,
-    "llm_analysis": "Analyse générée automatiquement (Mode Hors-Ligne) : Le projet présente des indicateurs financiers solides. Le retour sur investissement et la VAN positive justifient le lancement immédiat de la production de vannes pour le marché algérien."
+    "npv": 14618739.29,
+    "breakeven": 818,
+    "llm_super_analysis": "1. Executive Summary\nLe projet VHP-200 est viable et hautement rentable grace au choix de fournisseurs allemands et a l'optimisation des couts d'usinage.\n\n2. Product Specification\nVanne Haute Pression (VHP-200). Poids: 510 kg environ. Materiaux principaux: Inox et joints Viton.\n\n3. Supplier Analysis\nLe fournisseur principal sélectionné est Maschinenfabrik Christian Hagans (7.5 DZD/kg). Ce choix garantit un excellent rapport qualite/prix.\n\n4. Total Cost of Ownership (10 Years)\nLe TCO inclut 3 914 000 DZD pour le lot, sans oublier l'energie (150k) et l'usinage (3M). \n\n5. SWOT Analysis\n- Forces: Fournisseur fiable.\n- Faiblesses: Dependance a l'exportation.\n- Opportunites: Expansion du marche du gaz.\n- Menaces: Volatilite des prix de l'acier.\n\n6. Financial Projections\nPrix de vente unitaire: 23 484 DZD. Marge brute: 20%. Valeur Actuelle Nette sur 3 ans : ~14,6 Millions DZD.\n\n7. Recommendation\nLe projet recoit un avis final : GO POUR INVESTISSEMENT."
 }
