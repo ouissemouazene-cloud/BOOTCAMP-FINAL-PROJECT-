@@ -85,7 +85,7 @@ class NegotiatorAgent:
                         "prompt": prompt,
                         "stream": False
                     }
-                    api_response = requests.post(ollama_url, json=payload, timeout=30)
+                    api_response = requests.post(ollama_url, json=payload, timeout=120)
                     api_response.raise_for_status()
                     llm_text = api_response.json().get("response", "").strip()
                     
@@ -157,7 +157,7 @@ class NegotiatorAgent:
 if __name__ == "__main__":
     import sys
     # On va chercher les données de l'agent 4 fraîchement créées pour le test local
-    fallback_path = "../Agent_4/suppliers_data.json"
+    fallback_path = "../AGENT4/suppliers_data.json"
     local_path = "suppliers_data.json"
     
     suppliers_data = []

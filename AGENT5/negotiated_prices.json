@@ -1,19 +1,19 @@
 {
     "Q115573256": {
         "base_price": 444.0,
-        "discounted_price": 377.4,
+        "discounted_price": 200.0,
         "currency": "USD",
         "status": "Negotiated - OK"
     },
     "pivan": {
         "base_price": 326.0,
-        "discounted_price": 277.1,
+        "discounted_price": 5.0,
         "currency": "USD",
         "status": "Negotiated - OK"
     },
     "Janatha Steels": {
         "base_price": 381.0,
-        "discounted_price": 323.85,
+        "discounted_price": 2.0,
         "currency": "USD",
         "status": "Negotiated - OK"
     }

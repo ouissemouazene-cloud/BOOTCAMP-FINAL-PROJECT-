@@ -4,15 +4,15 @@ from typing import TypedDict, List, Dict, Any
 from langgraph.graph import StateGraph, END
 
 # Importation des agents (Squelettes)
-from Agent_1.AGENT1 import TechnicalAnalysisAgent
-from Agent_2.AGENT2 import CADBIMAgent
-from Agent_3.AGENT3 import MultimediaAgent
-from Agent_4.AGENT4 import SourcingAgent
-from Agent_5.AGENT5 import NegotiatorAgent
-from Agent_6.AGENT6 import CostAnalystAgent
-from Agent_7.AGENT7 import BusinessStrategistAgent
-from Agent_8.AGENT8 import DigitalTwinAgent
-from Agent_9.AGENT9 import CatalogueAgent
+from AGENT1.AGENT1 import TechnicalAnalysisAgent
+from AGENT2.AGENT2 import CADBIMAgent
+from AGENT3.AGENT3 import MultimediaAgent
+from AGENT4.AGENT4 import SourcingAgent
+from AGENT5.AGENT5 import NegotiatorAgent
+from AGENT6.AGENT6 import CostAnalystAgent
+from AGENT7.AGENT7 import BusinessStrategistAgent
+from AGENT8.AGENT8 import DigitalTwinAgent
+from AGENT9.AGENT9 import CatalogueAgent
 
 # --- Définition de l'Etat de INDUSTRIE IA ---
 class AgentState(TypedDict):
