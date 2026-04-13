@@ -1,61 +1,120 @@
-# 📦 Module 9 : Catalogue Exporter (INDUSTRIE IA)
+# Agent 9 — Commercial Catalogue Generation Engine (INDUSTRIE IA)
 
-Ce module représente **l'Agent 9**, le tout dernier agent du pipeline pour le challenge final de l'initiative *OpenIndustry Algérie* (Bootcamp IA 2026). 
+Agent 9 is the final stage of the **INDUSTRIE IA** pipeline. Its role is to transform complex, multi-agent industrial data (technical specs, CAD files, negotiation results, TCO, etc.) into a professional, client-ready commercial catalogue.
 
-Son rôle est capital : il consolide la totalité des informations générées par les 8 agents précédents, valide l'intégrité de ces données via **Pydantic**, puis les compile en **cinq formats différents** (HTML, PDF, Excel, JSON, XML). Il génère enfin un manifeste d'intégrité (hash SHA-256) et compresse le tout sous forme d'une archive `.zip` livrable au client.
+## 🚀 Overview
+
+The system acts as a "Commercial Reasoning Engine." It doesn't just export data; it interprets the output of Agents 1-8 to build a value-driven proposal for non-technical stakeholders.
+
+### Key Capabilities:
+- **Multiformat Delivery**: Generates HTML, PDF (optional), JSON, Excel, and XML.
+- **LLM-Powered Copywriting**: Uses Mistral (via Ollama) to generate high-impact commercial highlights and use-case scenarios.
+- **Strict Data Pruning**: Automatically simplifies technical jargon and hides internal complexity (e.g., specific supplier IDs, historical negotiation steps) to provide a "Client-Facing" view.
+- **Data Validation**: Enforces strict schema integrity using Pydantic models.
+- **Archive Management**: Packages all deliverables with an automated manifest and SHA-256 checksums into a single ZIP.
 
 ---
 
-## 🛠️ Pré-requis & Installation
+## 🏗️ Architecture
 
-Ce module nécessite plusieurs bibliothèques de génération de documents (openpyxl, weasyprint, jinja2, lxml).
+Agent 9 follows a robust 4-step generation workflow:
 
-1. **Installer les dépendances Python :**
+1. **Validation**: Validates the incoming `PipelineData` object using Pydantic to ensure all upstream agents (1-8) provided consistent data.
+2. **Commercial Reasoning**: Calls an LLM to transform technical materials and specs into structured commercial bullet points (Summary, Context, Value Proposition).
+3. **Generation**: Executes specialized generators for each format:
+    - `html_gen.py`: Professional rich UI using Jinja2 templates.
+    - `json_gen.py`: Produces both hierarchical and "BI-ready" flat JSON.
+    - `excel_gen.py`: Creates a 6-sheet technical and financial report.
+    - `xml_gen.py`: Standardized XML for ERP integration.
+    - `pdf_gen.py`: High-quality PDF export (via WeasyPrint).
+4. **Finalization**: Computes manifests, verifies file sizes/hashes, and compresses the results.
+
+---
+
+## 📂 Project Structure
+
+```text
+AGENT9/
+├── agent9.PY            # Main orchestrator & LangGraph Node
+├── prompts.py           # Externalized LLM prompt templates
+├── models.py            # Pydantic data schemas (Agent 1-8)
+├── fake_data.py         # Mock data for standalone testing
+├── requirements.txt     # Python dependencies
+├── generators/          # Format-specific logic
+│   ├── html_gen.py
+│   ├── json_gen.py
+│   ├── excel_gen.py
+│   ├── xml_gen.py
+│   └── pdf_gen.py
+├── templates/           # Jinja2 templates
+│   ├── catalogue.html.j2
+│   └── catalogue.xml.j2
+└── output_catalogue/    # Default output directory
+```
+
+---
+
+## 🔧 Installation & Setup
+
+### Prerequisites:
+- **Python 3.10+**
+- **Ollama**: Running locally with the `mistral` model installed.
+- **GTK3 (Optional)**: Required if you wish to generate PDFs via WeasyPrint.
+
+### Steps:
+1. **Clone the repository** and navigate to the `AGENT9` folder.
+2. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
-
-2. **Note spécifique pour le PDF (WeasyPrint sous Windows) :**
-   Si vous êtes sous Windows, WeasyPrint nécessite les bibliothèques **GTK3** pour fonctionner. Si GTK3 n'est pas détecté, l'Agent 9 ne crashera pas : il capturera l'exception (`OSError`) grâce à son fallback sécurisé et continuera la génération des autres formats sans le PDF.
+3. **Ensure Ollama is running**:
+   ```bash
+   ollama pull mistral
+   ```
 
 ---
 
-## 🚀 Exécution & Tests
+## 🛠️ Usage
 
-### Exécution Autonome (Standalone)
-Vous pouvez tester l'agent 9 de manière isolée avec des fausses données issues du pipeline complet :
-
+### Standalone Mode (Testing)
+You can run Agent 9 independently using mock data to verify the generation process:
 ```bash
 python agent9.PY
 ```
-Cela générera un dossier `output_catalogue/` à la racine de l'agent contenant tous les formats générés ainsi que l'archive finale.
+The results will be available in the `./output_catalogue/` directory.
 
-### Tests Unitaires
-Les tests unitaires assurent la validation du pipeline, couvrant les cas conformes et les mauvaises structurations de données :
+### LangGraph Integration
+Agent 9 is designed to fit perfectly into a LangGraph pipeline. Import the `agent9_node` to add it to your state graph:
+```python
+from agent9 import agent9_node
 
-```bash
-python -m pytest tests/ -v
+# In your graph definition:
+workflow.add_node("agent9", agent9_node)
+workflow.add_edge("agent8", "agent9")
 ```
-Les tests valident la structure XML, le nombred'onglets Excel, le parsing HTML, la présence du manifeste, etc.
 
 ---
 
-## 🧠 Architecture & Méthodes
+## 📊 Data Schema (Expected Input)
 
-Le code est architecturé autour d'un principe de séparation des responsabilités. Le fichier principal `agent9.PY` orchestre le flux, tandis que les dossiers `generators/` et `templates/` concentrent la logique propre à chaque format.
+Agent 9 expects a `PipelineData` object containing:
+- **Agent 1**: Material, Diameter, Pressure, Flow Rate, Lifespan.
+- **Agent 2**: CAD file paths and scale data.
+- **Agent 3**: Video presentation assets.
+- **Agent 4 & 5**: Procurement metadata (Supplier selected, lead times).
+- **Agent 6**: TCO analysis (Total unit cost, inflation index).
+- **Agent 7**: Business Plan (SWOT, NPV, ROI).
+- **Agent 8**: Digital Twin status (Maintenance schedule, health scores).
 
-### 1- Validation Pydantic
-Dès sa prise en main des données du *State* global de LangGraph, l'agent utilise le modèle **`PipelineData(**pipeline_data)`** décrit dans `models.py`. Si le moindre champ attendu par nos spécifications est manquant ou ne correspond pas au bon format, une `ValidationError` est levée, empêchant la génération d'un livrable défectueux.
+---
 
-### 2- Dossier `generators/` (Les 5 Formats)
-- **`html_gen.py` :** Injecte les variables système (`specs`, `twin`, `bp`, etc.) dans notre template Jinja2 respectif pour produire un HTML web autonome.
-- **`pdf_gen.py` :** Convertit précisément le résultat HTML mentionné précédemment en un document imprimable PDF en respectant un format de dimensions exact via `WeasyPrint`.
-- **`excel_gen.py` :** Conçu via `openpyxl`, il met un point d'honneur sur la lisibilité humaine et génère 6 onglets hautement stylisés contenant respectivement (Résumé, Spécifications, Fournisseurs, Coûts TCO, Business Plan, Jumeau Numérique).
-- **`xml_gen.py` :** Assure la compatibilité machine industrielle, il intègre à un modèle Jinja2 la structuration imposée puis est validé via **LXML** pour vous assurer qu'aucune balise n'ait été mal formée.
-- **`json_gen.py` :** Simplifie les données en une structure hiérarchique idéale pour un développement API.
+## 📝 Commercial Rules (Client-Facing Mode)
+The system enforces strict commercial rules to protect industrial secrets:
+1. **No Specific Suppliers**: Only "Certified Network" mentions are exported to the client.
+2. **No Negotiation History**: Displays only the final agreed terms.
+3. **Time Ranges**: Maintenance dates from Agent 8 are converted into safe operational ranges.
+4. **Unified Output**: All output files are named `catalogue_professional.*` for consistent branding.
 
-### 3- L'archive Automatisée et le Hash 
-Afin d'assurer l'**intégrité du livrable final**, l'agent produit un document nommé `manifeste.json`. Ce dernier référence les 5 fichiers, leur taille exacte générée, et applique un calcul **SHA-256**. L'agent englobe le tout grâce à `zipfile`.
+---
 
-### 4- Intégration LangGraph
-La fonction `agent9_node(state: PipelineState)` est l'unique point d'entrée pour le Node LangGraph. Elle récupère le `state` issu du dictionnaire de l'Agent 8, s'infiltre dans le processus de génération (`run_agent9`), met à jour ce dict avec les chemins vers le `<dossier source>` des exports et son archive validée, puis renvoie la boucle finale de notre **INDUSTRIE IA**.
+*© 2026 INDUSTRIE IA — Smart Engineering Systems*
