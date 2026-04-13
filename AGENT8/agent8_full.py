@@ -544,8 +544,8 @@ Respond ONLY with a valid JSON object like this:
     threshold_response = llm_reason(
         threshold_prompt,
         fallback=json.dumps({
-            "temperature_warning_c":  50.0,
-            "temperature_critical_c": 80.0,
+            "temperature_warning_c":  round(specs["temperature_max_celsius"] * 0.6, 1),
+            "temperature_critical_c": round(specs["temperature_max_celsius"] * 0.8, 1),
             "pressure_warning_bar":   specs["pressure_bar"] * 1.10,
             "pressure_critical_bar":  specs["pressure_bar"] * 1.20,
             "vibration_warning_mms":  specs["vibration_limit_mm_s"],
@@ -575,8 +575,8 @@ Respond ONLY with a valid JSON object like this:
     except Exception:
         # Fallback to safe calculated defaults
         thresholds = {
-            "temperature_warning_c":  50.0,
-            "temperature_critical_c": 80.0,
+            "temperature_warning_c":  round(specs["temperature_max_celsius"] * 0.6, 1),
+            "temperature_critical_c": round(specs["temperature_max_celsius"] * 0.8, 1),
             "pressure_warning_bar":   round(specs["pressure_bar"] * 1.10, 1),
             "pressure_critical_bar":  round(specs["pressure_bar"] * 1.20, 1),
             "vibration_warning_mms":  specs["vibration_limit_mm_s"],

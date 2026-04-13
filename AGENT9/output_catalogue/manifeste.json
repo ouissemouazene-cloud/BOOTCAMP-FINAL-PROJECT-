@@ -1,17 +1,17 @@
 {
   "pipeline": "INDUSTRIE_IA",
   "agent": 9,
-  "generated_at": "2026-04-13 00:41:39",
+  "generated_at": "2026-04-13 12:15:10",
   "files": {
     "catalogue.html": {
-      "size_bytes": 3856,
-      "size_kb": 3.8,
-      "sha256": "bc751e79533fd386447eb9f216ca41aa3faff2d6b22521d732a24781867e6815"
+      "size_bytes": 21543,
+      "size_kb": 21.0,
+      "sha256": "7a984abd25c55a92fcccd64e1121c242639dd95465cb6e902b0fde3ff9001226"
     },
     "catalogue.xlsx": {
-      "size_bytes": 11415,
+      "size_bytes": 11414,
       "size_kb": 11.1,
-      "sha256": "7391d070f59a57e08bb677f60f4ab6003a765cda44bd6ac63e160792a2674c92"
+      "sha256": "5e3b4c9d20820cd2a20c7970d71a1f33ee0728cc0ffba1943ea0c54b22234f5c"
     },
     "catalogue.json": {
       "size_bytes": 7533,
@@ -21,7 +21,7 @@
     "catalogue.xml": {
       "size_bytes": 1202,
       "size_kb": 1.2,
-      "sha256": "02d12bf3fa5c3b895da7a8e78ee711dcf84eda246a6fec54fecd2255b97f8a60"
+      "sha256": "1f1cdcf0d8637c0f1691b156611af1b82dc86daf07b3a6809cfcbab8c618b655"
     }
   }
 }
