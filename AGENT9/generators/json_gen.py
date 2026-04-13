@@ -13,16 +13,14 @@ import json
 from models import PipelineData
 
 
-def generate_json(data: PipelineData, output_path: str) -> str:
+def generate_json(data: PipelineData, output_path: str, extra_meta: dict = None) -> str:
     """
     Génère le catalogue en JSON.
 
     Args:
         data: PipelineData validé
         output_path: chemin du fichier .json à créer
-
-    Returns:
-        Chemin du fichier créé
+        extra_meta: métadonnées supplémentaires (LLM)
     """
 
     # ── Version hiérarchique : dump complet via Pydantic ─────────────────────
@@ -67,13 +65,70 @@ def generate_json(data: PipelineData, output_path: str) -> str:
         "critical_alerts_count":    sum(1 for a in data.agent8.alerts if a.severity == "critical"),
     }
 
-    # ── Assembler les deux versions dans un seul fichier ──────────────────────
+    # ── Version Client-Facing (Améliorée avec Points & Tables) ─────────────────
+    client_facing = {
+        "1_executive_summary": {
+            "product_name": data.agent1.part_name,
+            "commercial_highlights": extra_meta.get("description_points") if extra_meta else ["Industrial quality"],
+            "final_total_price_usd": data.agent6.total_purchase_usd,
+            "delivery_time": f"{data.agent5.delivery_days} Days",
+            "strategic_value": extra_meta.get("value_points") if extra_meta else ["High ROI"]
+        },
+        "2_product_overview": {
+            "use_cases_and_context": extra_meta.get("explanation_points") if extra_meta else ["Fluid control"],
+            "operational_context": "Validated for heavy-duty industrial integration."
+        },
+        "3_detailed_specifications": {
+            "material": data.agent1.material,
+            "dimensions": {
+                "diameter_mm": data.agent1.diameter_mm,
+                "weight_kg": data.agent1.weight_kg,
+                "tolerance_mm": data.agent1.tolerance_mm
+            },
+            "performance_limits": {
+                "max_pressure_bar": data.agent1.pressure_bar,
+                "max_temp_celsius": data.agent1.temperature_max_celsius,
+                "max_flow_m3h": data.agent1.flow_rate_m3h
+            },
+            "expected_service_life_years": data.agent1.lifespan_years_expected
+        },
+        "4_visual_and_media": {
+            "media_assets": [
+                data.agent3.files_generated[0] if data.agent3 and data.agent3.files_generated else "",
+                data.agent2.files_generated[0] if data.agent2 and data.agent2.files_generated else ""
+            ]
+        },
+        "5_pricing": {
+            "unit_price_usd": data.agent6.unit_cost_usd,
+            "quantity": data.agent6.quantity_units,
+            "final_total_price_usd": data.agent6.total_purchase_usd,
+            "pricing_statement": "All inclusive (materials, manufacturing, logistics)"
+        },
+        "6_production_and_delivery": {
+            "timeline_days": data.agent5.delivery_days,
+            "fulfillment_status": "Priority scheduling upon validation."
+        },
+        "7_supplier_decision": {
+            "assigned_network": "Certified high-reliability industrial manufacturing network"
+        },
+        "8_maintenance_summary": {
+            "standard_interval_months": "6-9 months",
+            "lifecycle_recommendation": "Engineered for minimal downtime and predictive maintenance compatibility."
+        },
+        "9_client_value_justification": {
+            "benefits": extra_meta.get("value_points") if extra_meta else ["Quality assurance"]
+        },
+        "10_next_step": {
+            "call_to_action": "Confirm procurement to initiate immediate manufacturing cycle"
+        }
+    }
+
+    # ── Assembler les versions dans un seul fichier ──────────────────────
     output = {
-        "catalogue_version": "1.0",
-        "pipeline": "INDUSTRIE_IA",
-        "agent": 9,
-        "summary": flat,           # Vue simplifiée — accès rapide aux KPIs
-        "full_data": hierarchical  # Données complètes — tous les agents
+        "catalogue_version": "1.1",
+        "generated_at": data.agent8.simulation_period.split(" to ")[0] if data.agent8 else "2026-01-01",
+        "product_id": data.agent1.part_id,
+        "commercial_catalogue": client_facing
     }
 
     with open(output_path, "w", encoding="utf-8") as f:

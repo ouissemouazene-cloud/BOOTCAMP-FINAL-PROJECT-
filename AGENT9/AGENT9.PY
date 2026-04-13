@@ -25,6 +25,7 @@ import json
 import zipfile
 import hashlib
 import tempfile
+import ollama
 from datetime import datetime
 from pathlib import Path
 from typing import TypedDict, Any
@@ -38,6 +39,7 @@ from generators.html_gen import generate_html
 from generators.xml_gen import generate_xml
 from generators.json_gen import generate_json
 from generators.excel_gen import generate_excel
+import prompts  # Import the new prompts file
 
 # WeasyPrint est importé ici pour que l'erreur soit claire si pas installé
 try:
@@ -116,6 +118,46 @@ def _create_manifest(files: dict, generated_at: str) -> dict:
 
 
 # =============================================================================
+# LLM Intelligence Layer (via Ollama / Mistral)
+# =============================================================================
+def llm_reason(prompt: str, fallback: str = "N/A", max_tokens: int = 500) -> str:
+    """
+    Calls Mistral via Ollama for intelligent reasoning.
+    Falls back to a safe default if Ollama is not available.
+    """
+    try:
+        response = ollama.chat(
+            model="mistral",
+            messages=[{"role": "user", "content": prompt}],
+            options={"num_predict": max_tokens}
+        )
+        return response["message"]["content"].strip()
+    except Exception:
+        return fallback
+
+
+def parse_llm_list(text: str) -> list:
+    """
+    Parses a string containing bullet points into a clean Python list.
+    Supports '-', '*', '1.', etc.
+    """
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
+    cleaned = []
+    for line in lines:
+        # Remove common bullet prefixes
+        for prefix in ["- ", "* ", "• ", ". "]:
+            if line.startswith(prefix):
+                line = line[len(prefix):].strip()
+        # Handle "1. ", "2. " etc.
+        if line and line[0].isdigit() and line[1:3] == ". ":
+            line = line[3:].strip()
+        
+        if line:
+            cleaned.append(line)
+    return cleaned
+
+
+# =============================================================================
 # Fonction principale de génération des 5 formats
 # Peut être appelée directement (standalone) ou via LangGraph
 # =============================================================================
@@ -150,11 +192,32 @@ def run_agent9(pipeline_data: dict, output_dir: str = None) -> dict:
     os.makedirs(output_dir, exist_ok=True)
 
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    part_id = data.agent1.part_id.replace("/", "_")  # Sécuriser pour nom de fichier
+    part_id = data.agent1.part_id.replace("/", "_")
 
-    # ── Étape 3 : Préparer le contexte Jinja2 ────────────────────────────────
-    # Ce dictionnaire est passé aux templates HTML et XML
+    # ── Étape 3 : Intelligence LLM pour le catalogue Client (Structuré) ──────
+    print("\n[2/5] RAISONNEMENT IA (Génération du contenu structuré)...")
+    
+    # 3.1 Description détaillée (Points)
+    desc_p = prompts.DETAILED_DESCRIPTION_PROMPT.format(
+        part_name=data.agent1.part_name, 
+        material=data.agent1.material
+    )
+    res_desc = llm_reason(desc_p, fallback="- High-quality industrial component\n- Durable construction\n- Engineered for precision\n- Certified materials")
+    client_description_list = parse_llm_list(res_desc)
+    
+    # 3.2 Cas d'usage (Points)
+    use_p = prompts.INDUSTRIAL_USE_CASE_PROMPT.format(part_name=data.agent1.part_name)
+    res_use = llm_reason(use_p, fallback="- Energy infrastructure\n- Fluid management\n- Industrial treatment")
+    client_explanation_list = parse_llm_list(res_use)
+
+    # 3.3 Valeur Stratégique (Points)
+    val_p = prompts.STRATEGIC_VALUE_PROMPT.format(part_name=data.agent1.part_name)
+    res_val = llm_reason(val_p, fallback="- Optimized uptime\n- High ROI\n- Reduced maintenance risk")
+    client_value_list = parse_llm_list(res_val)
+
+    # ── Étape 4 : Préparer le contexte Jinja2 ────────────────────────────────
     context = {
+        # Données brutes des agents
         "specs":           data.agent1,
         "cad":             data.agent2,
         "video":           data.agent3,
@@ -163,44 +226,70 @@ def run_agent9(pipeline_data: dict, output_dir: str = None) -> dict:
         "tco":             data.agent6,
         "bp":              data.agent7,
         "twin":            data.agent8,
+        
+        # Métadonnées
         "generated_date":  generated_at,
+        
+        # Contenu intelligent (Listes pour rendu HTML <ul>)
+        "client_description_list": client_description_list,
+        "client_explanation_list": client_explanation_list,
+        "client_value_list":       client_value_list,
+        
+        # Données techniques avancées pour les tableaux riches
+        "tech_limits": {
+            "max_temp": data.agent1.temperature_max_celsius,
+            "flow_rate": data.agent1.flow_rate_m3h,
+            "tolerance": data.agent1.tolerance_mm,
+            "lifespan": data.agent1.lifespan_years_expected,
+            "pressure": data.agent1.pressure_bar
+        }
     }
 
-    # ── Étape 4 : Générer les 5 formats ──────────────────────────────────────
-    print("\n[2/4] Génération des 5 formats...")
+    # ── Étape 5 : Générer les Formats Client (HTML + JSON prioritaires) ──────
+    print("\n[3/5] Génération des livrables client (catalogue_professional)...")
 
     produced_files = {}
 
-    # 4a. HTML
-    html_path = os.path.join(output_dir, f"catalogue_{part_id}.html")
+    # 5a. HTML
+    html_path = os.path.join(output_dir, "catalogue_professional.html")
     generate_html(context, html_path)
     produced_files["catalogue.html"] = html_path
 
-    # 4b. PDF (si WeasyPrint est installé)
+    # 5b. PDF (si WeasyPrint est installé)
     if PDF_AVAILABLE:
-        pdf_path = os.path.join(output_dir, f"catalogue_{part_id}.pdf")
+        pdf_path = os.path.join(output_dir, "catalogue_professional.pdf")
         generate_pdf(context, pdf_path)
         produced_files["catalogue.pdf"] = pdf_path
     else:
         print("  [PDF] ⚠ Ignoré (WeasyPrint non disponible)")
 
-    # 4c. Excel
-    xlsx_path = os.path.join(output_dir, f"catalogue_{part_id}.xlsx")
-    generate_excel(data, xlsx_path)
-    produced_files["catalogue.xlsx"] = xlsx_path
-
-    # 4d. JSON
-    json_path = os.path.join(output_dir, f"catalogue_{part_id}.json")
-    generate_json(data, json_path)
+    # 5c. JSON
+    json_path = os.path.join(output_dir, "catalogue_professional.json")
+    # Pass structured data to JSON for consistency
+    generate_json(data, json_path, extra_meta={
+        "description_points": client_description_list,
+        "explanation_points": client_explanation_list,
+        "value_points":       client_value_list,
+        "technical_matrix": {
+            "max_temp": data.agent1.temperature_max_celsius,
+            "flow_rate": data.agent1.flow_rate_m3h,
+            "tolerance": data.agent1.tolerance_mm
+        }
+    })
     produced_files["catalogue.json"] = json_path
 
-    # 4e. XML
-    xml_path = os.path.join(output_dir, f"catalogue_{part_id}.xml")
-    generate_xml(context, xml_path)
-    produced_files["catalogue.xml"] = xml_path
+    # 5d. Excel (Généré en interne mais exclu du livrable client ZIP par défaut)
+    xlsx_path = os.path.join(output_dir, "catalogue_professional.xlsx")
+    generate_excel(data, xlsx_path)
+    # produced_files["catalogue.xlsx"] = xlsx_path
 
-    # ── Étape 5 : Créer le manifeste ─────────────────────────────────────────
-    print("\n[3/4] Création du manifeste...")
+    # 5e. XML (Généré en interne mais exclu du livrable client ZIP par défaut)
+    xml_path = os.path.join(output_dir, "catalogue_professional.xml")
+    generate_xml(context, xml_path)
+    # produced_files["catalogue.xml"] = xml_path
+
+    # ── Étape 6 : Créer le manifeste ─────────────────────────────────────────
+    print("\n[4/5] Création du manifeste...")
     manifest = _create_manifest(produced_files, generated_at)
 
     manifest_path = os.path.join(output_dir, "manifeste.json")
@@ -209,9 +298,9 @@ def run_agent9(pipeline_data: dict, output_dir: str = None) -> dict:
     produced_files["manifeste.json"] = manifest_path
     print(f"  [Manifeste] ✓ → {manifest_path}")
 
-    # ── Étape 6 : Créer le ZIP livrable ──────────────────────────────────────
-    print("\n[4/4] Compression ZIP...")
-    zip_name = f"livrable_client_{part_id}.zip"
+    # ── Étape 7 : Créer le ZIP livrable ──────────────────────────────────────
+    print("\n[5/5] Compression ZIP...")
+    zip_name = "livrable_client_professional.zip"
     zip_path = os.path.join(output_dir, zip_name)
 
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:

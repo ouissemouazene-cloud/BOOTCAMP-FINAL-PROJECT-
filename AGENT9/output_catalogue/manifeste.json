@@ -1,27 +1,17 @@
 {
   "pipeline": "INDUSTRIE_IA",
   "agent": 9,
-  "generated_at": "2026-04-13 12:15:10",
+  "generated_at": "2026-04-13 15:58:08",
   "files": {
     "catalogue.html": {
-      "size_bytes": 21543,
-      "size_kb": 21.0,
-      "sha256": "7a984abd25c55a92fcccd64e1121c242639dd95465cb6e902b0fde3ff9001226"
-    },
-    "catalogue.xlsx": {
-      "size_bytes": 11414,
-      "size_kb": 11.1,
-      "sha256": "5e3b4c9d20820cd2a20c7970d71a1f33ee0728cc0ffba1943ea0c54b22234f5c"
+      "size_bytes": 15521,
+      "size_kb": 15.2,
+      "sha256": "e665fce82dd27507e7a1797e0d8b2950188726c7af8ba0588339797b8522bdb3"
     },
     "catalogue.json": {
-      "size_bytes": 7533,
-      "size_kb": 7.4,
-      "sha256": "aa3a7a61704d5eded1f517f8d1d9d6febbcb2acdc9f9a8fa671b2582cd051e1a"
-    },
-    "catalogue.xml": {
-      "size_bytes": 1202,
-      "size_kb": 1.2,
-      "sha256": "1f1cdcf0d8637c0f1691b156611af1b82dc86daf07b3a6809cfcbab8c618b655"
+      "size_bytes": 5999,
+      "size_kb": 5.9,
+      "sha256": "78aa3a018f7099d554db5d5ecc237375d69a96cec675514eed5bbfe017ffcc41"
     }
   }
 }

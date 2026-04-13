@@ -130,11 +130,11 @@ class TestHTMLGenerator:
         assert "Vanne Industrielle DN100 PN40" in content
 
     def test_html_contains_supplier(self, jinja_context, tmp_dir):
-        """Le HTML contient le fournisseur retenu."""
+        """Le HTML contient la mention du réseau de fabrication."""
         path = os.path.join(tmp_dir, "test.html")
         generate_html(jinja_context, path)
         content = open(path, encoding="utf-8").read()
-        assert "AcierPro SARL" in content
+        assert "certified industrial manufacturing network" in content
 
     def test_html_is_valid_utf8(self, jinja_context, tmp_dir):
         """Le HTML est encodé en UTF-8 valide (accents, caractères spéciaux)."""
@@ -165,25 +165,40 @@ class TestJSONGenerator:
             data = json.load(f)  # Lève json.JSONDecodeError si invalide
         assert isinstance(data, dict)
 
-    def test_json_has_summary_and_full(self, valid_data, tmp_dir):
-        """Le JSON contient les sections 'summary' et 'full_data'."""
+    def test_json_is_strictly_commercial(self, valid_data, tmp_dir):
+        """Le JSON ne contient que la partie commerciale et aucune donnée technique interne."""
         path = os.path.join(tmp_dir, "test.json")
         generate_json(valid_data, path)
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        assert "summary" in data
-        assert "full_data" in data
+        
+        # Vérifier la présence de la clé principale
+        assert "commercial_catalogue" in data
+        assert "catalogue_version" in data
+        
+        # Vérifier l'ABSENCE des clés internes
+        assert "summary" not in data
+        assert "full_data" not in data
+        
+        # Vérifier que les noms de fournisseurs ne leakent pas
+        json_str = json.dumps(data)
+        assert "AcierPro SARL" not in json_str
 
-    def test_json_summary_has_kpis(self, valid_data, tmp_dir):
-        """Le résumé JSON contient les KPIs essentiels."""
+    def test_json_structure_compliance(self, valid_data, tmp_dir):
+        """Le JSON respecte la structure des 10 sections commerciales (version détaillée)."""
         path = os.path.join(tmp_dir, "test.json")
         generate_json(valid_data, path)
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        summary = data["summary"]
-        assert "roi_percent" in summary
-        assert "tco_total_usd" in summary
-        assert "health_score_final" in summary
+        
+        sections = data["commercial_catalogue"]
+        assert "1_executive_summary" in sections
+        assert "3_detailed_specifications" in sections
+        assert "5_pricing" in sections
+        
+        # Vérifier que les points sont bien des listes
+        assert isinstance(sections["1_executive_summary"]["commercial_highlights"], list)
+        assert isinstance(sections["9_client_value_justification"]["benefits"], list)
 
     def test_json_tco_value_correct(self, valid_data, tmp_dir):
         """La valeur TCO dans le JSON correspond à celle des données."""
@@ -191,7 +206,8 @@ class TestJSONGenerator:
         generate_json(valid_data, path)
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        assert data["summary"]["tco_total_usd"] == 387450.0
+        # La valeur est maintenant dans Pricing
+        assert data["commercial_catalogue"]["5_pricing"]["final_total_price_usd"] == 259200.0
 
 
 # =============================================================================

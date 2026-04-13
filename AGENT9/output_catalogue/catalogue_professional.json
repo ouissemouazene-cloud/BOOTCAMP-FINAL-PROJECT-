@@ -1,140 +1,78 @@
 {
-  "catalogue_metadata": {
-    "project_id": "INDUSTRIE_IA_001",
-    "generation_date": "2026-04-13",
-    "target_audience": ["industrial clients", "technical engineers", "business stakeholders"],
-    "tone": "professional"
-  },
-  "sections": {
+  "catalogue_version": "1.1",
+  "generated_at": "2026-01-01",
+  "product_id": "VLV-DN100-PN40-316L",
+  "commercial_catalogue": {
     "1_executive_summary": {
-      "overview": "The Valve DN100 PN40 is a high-pressure industrial valve specifically engineered for fluid control in demanding environments.",
-      "value_proposition": "Our solution ensures extreme durability and is optimized for supply chain reliability.",
-      "total_project_cost": 20000,
-      "roi_percent": 18
+      "product_name": "Vanne Industrielle DN100 PN40",
+      "commercial_highlights": [
+        "Technical Excellence: Vanne Industrielle DN100 PN40 is meticulously crafted from premium Inox 316L material, ensuring exceptional resistance to corrosion in harsh industrial environments, even against chlorides and other aggressive chemicals.",
+        "Industrial Durability: Designed for high-pressure applications (PN40), this valve exhibits remarkable strength and durability, capable of withstanding extreme conditions without compromising performance or safety.",
+        "Quality Assurance: Each Vanne Industrielle DN100 PN40 is rigorously tested during manufacturing to ensure compliance with international quality standards. This commitment to quality guarantees reliable operation and longevity for your industrial processes.",
+        "Unparalleled Performance: With its optimized design, the Vanne Industrielle DN100 PN40 offers seamless control of fluid flow while maintaining a minimal pressure drop. Its superior performance makes it an ideal choice for critical industrial applications where precision and reliability are paramount."
+      ],
+      "final_total_price_usd": 259200.0,
+      "delivery_time": "18 Days",
+      "strategic_value": [
+        "**Uptime Assurance**: With the Vanne Industrielle DN100 PN40, you'll experience minimal downtime due to its robust design and high-pressure capabilities. This ensures uninterrupted production, maximizing your operational efficiency and profitability.",
+        "**ROI through Quality**: Investing in this premium product guarantees long-term durability and reliability. The superior quality of the Vanne Industrielle DN100 PN40 significantly reduces the need for frequent replacements, thereby lowering maintenance costs and ensuring a strong return on investment (ROI).",
+        "**Risk Reduction**: By choosing the Vanne Industrielle DN100 PN40, you are making a secure investment that minimizes risks associated with low-quality equipment. The product's proven track record of performance and safety ensures compliance with industry standards, reducing potential liabilities and maintaining a safe working environment for your team."
+      ]
     },
     "2_product_overview": {
-      "name": "Valve DN100 PN40",
-      "description": "High-pressure industrial valve for fluid control",
-      "use_case": "Industrial fluid manipulation workflows requiring extreme structural integrity and exact tolerance handling."
-    },
-    "3_technical_specifications": {
-      "dimensions": "100mm (Diameter) x 250mm (Length)",
-      "weight_kg": 12.5,
-      "material": "Stainless Steel 316L",
-      "pressure_rating": "PN40",
-      "tolerances_mm": 0.02,
-      "standards": ["ISO 9001", "DIN EN 1092"]
-    },
-    "4_cad_and_engineering_assets": [
-      {
-        "file": "valve_dn100.dxf",
-        "format": "DXF",
-        "usage": "Standard 2D schematics for exact machining tolerances."
-      },
-      {
-        "file": "valve_dn100.ifc",
-        "format": "IFC",
-        "usage": "3D BIM integration file for digital structural planning."
-      }
-    ],
-    "5_suppliers_analysis": [
-      {
-        "name": "SteelCorp",
-        "country": "Germany",
-        "price_per_unit_usd": 120,
-        "lead_time_days": 15
-      },
-      {
-        "name": "InoxGlobal",
-        "country": "China",
-        "price_per_unit_usd": 95,
-        "lead_time_days": 25
-      },
-      {
-        "name": "MaghrebSteel",
-        "country": "Algeria",
-        "price_per_unit_usd": 110,
-        "lead_time_days": 10
-      }
-    ],
-    "6_negotiation_results": {
-      "details": [
-        {
-          "supplier": "SteelCorp",
-          "initial_price": 120,
-          "final_price": 110,
-          "notes": "Bulk discount applied"
-        },
-        {
-          "supplier": "InoxGlobal",
-          "initial_price": 95,
-          "final_price": 90,
-          "notes": "Delayed delivery compensation"
-        }
+      "use_cases_and_context": [
+        "**Oil and Gas Industry**: In oil and gas production, the Vanne Industrielle DN100 PN40 is crucial for controlling the flow of high-pressure liquids such as crude oil, water, and natural gas. It's used in various stages, including extraction, processing, and transportation, to regulate pressure, maintain safety standards, and optimize production efficiency.",
+        "**Chemical Processing**: In chemical manufacturing, this valve is essential for handling volatile, hazardous, or corrosive substances. It's used in processes like mixing, heating, cooling, and separation where precise control over the fluid flow and pressure is necessary to ensure safety, efficiency, and product quality.",
+        "**Power Generation**: In power plants, particularly those using gas turbines, Vanne Industrielle DN100 PN40 is vital for managing the flow of combustion air or fuel gas. The valve's ability to handle high pressure and flow rates helps maintain optimal operating conditions in the power generation process, contributing to higher energy output and reduced emissions."
       ],
-      "best_supplier_choice_justification": "SteelCorp (Germany) was selected. Despite a slightly higher unit cost ($110), a 15-day lead time mitigates severe shipping delays compared to Chinese imports, and the bulk discount scales well."
+      "operational_context": "Validated for heavy-duty industrial integration."
     },
-    "7_cost_analysis_tco": {
-      "unit_cost": 100,
+    "3_detailed_specifications": {
+      "material": "Inox 316L",
+      "dimensions": {
+        "diameter_mm": 100.0,
+        "weight_kg": 12.5,
+        "tolerance_mm": 0.05
+      },
+      "performance_limits": {
+        "max_pressure_bar": 40.0,
+        "max_temp_celsius": 200.0,
+        "max_flow_m3h": 85.0
+      },
+      "expected_service_life_years": 15
+    },
+    "4_visual_and_media": {
+      "media_assets": [
+        "vanne_DN100_presentation.mp4",
+        "vanne_DN100_plan.dxf"
+      ]
+    },
+    "5_pricing": {
+      "unit_price_usd": 1296.0,
       "quantity": 200,
-      "total_cost": 20000,
-      "maintenance_cost_10y": 5000,
-      "inflation_impact_percent": 3.5
+      "final_total_price_usd": 259200.0,
+      "pricing_statement": "All inclusive (materials, manufacturing, logistics)"
     },
-    "8_business_plan": {
-      "metrics": {
-        "roi_percent": 18,
-        "npv_usd": 15000,
-        "break_even_years": 2.5
-      },
-      "revenue_projections_usd": {
-        "year_1": 30000,
-        "year_2": 50000,
-        "year_3": 80000
-      },
-      "swot_analysis": {
-        "strengths": ["High durability"],
-        "weaknesses": ["High initial cost"],
-        "opportunities": ["Growing demand"],
-        "threats": ["Competition"]
-      }
+    "6_production_and_delivery": {
+      "timeline_days": 18,
+      "fulfillment_status": "Priority scheduling upon validation."
     },
-    "9_production_plan": {
-      "estimated_timeline_days": 45,
-      "manufacturing_phases": [
-        "Phase 1: Raw Material Sourcing (Days 1-15)",
-        "Phase 2: Machining & Casing (Days 16-30)",
-        "Phase 3: Testing against PN40 specs & QA (Days 31-40)",
-        "Phase 4: Shipping & Delivery (Days 41-45)"
+    "7_supplier_decision": {
+      "assigned_network": "Certified high-reliability industrial manufacturing network"
+    },
+    "8_maintenance_summary": {
+      "standard_interval_months": "6-9 months",
+      "lifecycle_recommendation": "Engineered for minimal downtime and predictive maintenance compatibility."
+    },
+    "9_client_value_justification": {
+      "benefits": [
+        "**Uptime Assurance**: With the Vanne Industrielle DN100 PN40, you'll experience minimal downtime due to its robust design and high-pressure capabilities. This ensures uninterrupted production, maximizing your operational efficiency and profitability.",
+        "**ROI through Quality**: Investing in this premium product guarantees long-term durability and reliability. The superior quality of the Vanne Industrielle DN100 PN40 significantly reduces the need for frequent replacements, thereby lowering maintenance costs and ensuring a strong return on investment (ROI).",
+        "**Risk Reduction**: By choosing the Vanne Industrielle DN100 PN40, you are making a secure investment that minimizes risks associated with low-quality equipment. The product's proven track record of performance and safety ensures compliance with industry standards, reducing potential liabilities and maintaining a safe working environment for your team."
       ]
     },
-    "10_digital_twin_and_maintenance": {
-      "system_status": "operational",
-      "predicted_failures": [
-        {
-          "component": "seal",
-          "risk_level": "medium",
-          "estimated_days": 180
-        }
-      ],
-      "maintenance_schedule": [
-        {
-          "task": "Seal replacement",
-          "interval_days": 180
-        }
-      ]
-    },
-    "11_media": {
-      "video_url": "https://example.com/video.mp4",
-      "images": [
-        "https://example.com/render1.png",
-        "https://example.com/render2.png"
-      ]
-    },
-    "12_conclusion": {
-      "final_recommendation": "Proceed with the procurement of 200 units of the Valve DN100 PN40.",
-      "best_supplier": "SteelCorp ensures the safest intersection of price point and deliverability.",
-      "profitability_summary": "With a breakeven in 2.5 years, 18% ROI, and revenue scaling to $80,000 by Year 3, this industrial implementation is highly profitable and backed by predictive twin maintenance capabilities."
+    "10_next_step": {
+      "call_to_action": "Confirm procurement to initiate immediate manufacturing cycle"
     }
   }
 }

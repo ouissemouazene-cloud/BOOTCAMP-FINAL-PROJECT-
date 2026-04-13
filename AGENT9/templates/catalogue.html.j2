@@ -3,129 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industrial Catalogue | {{ specs.part_name }}</title>
+    <title>Commercial Proposal | {{ specs.part_name }}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Open+Sans:wght@400;600&display=swap');
 
         :root {
-            --primary: #1e3a8a; /* deep blue */
-            --secondary: #3b82f6; /* bright blue */
-            --accent: #ef4444; /* red for critical */
-            --success: #10b981; /* green */
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
+            --primary: #1e293b;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --bg-light: #f8fafc;
             --border: #e2e8f0;
+            --text-dark: #334155;
+            --text-light: #94a3b8;
+            --success: #10b981;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-body);
+            font-family: 'Open Sans', sans-serif;
+            background-color: #eef2f6;
             color: var(--text-dark);
+            margin: 0; 
+            padding: 0;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: var(--bg-card);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 50px auto;
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             border-radius: 12px;
             overflow: hidden;
         }
 
-        /* HEADER */
         .header {
             background-color: var(--primary);
             color: #ffffff;
-            padding: 50px 40px;
+            padding: 70px 50px;
             text-align: center;
         }
-        .header h1 { margin: 0; font-size: 38px; font-weight: 700; }
-        .header p { margin: 10px 0 0 0; font-size: 18px; color: #cbd5e1; }
 
-        /* CONTENT */
-        .content { padding: 50px 60px; }
-
-        /* SECTIONS */
-        .section { margin-bottom: 50px; }
-        .section-title {
-            color: var(--primary);
-            font-size: 24px;
-            border-bottom: 3px solid var(--secondary);
-            padding-bottom: 8px;
-            margin-bottom: 25px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
-        /* GRIDS & CARDS */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .card {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .card h4 { margin-top: 0; color: var(--secondary); font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+        .header p { margin: 15px 0 0 0; font-size: 16px; color: #cbd5e1; font-weight: 300; }
 
-        /* TABLES */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-card);
-            margin-bottom: 15px;
-        }
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        th { background-color: #f8fafc; color: var(--primary); font-weight: 600; width: 35%; }
+        .content { padding: 50px; }
+
+        .section { margin-bottom: 55px; }
         
-        .table-full th { background-color: var(--primary); color: white; width: auto; font-weight: 600; }
-        .table-full tr:nth-child(even) { background-color: #f8fafc; }
-        .table-full td { border-bottom: 1px solid var(--border); }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
 
-        /* UTILS */
+        .box {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .points-list {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        .points-list li {
+            position: relative;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            font-size: 15px;
+        }
+
+        .points-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 16px 15px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { font-weight: 700; color: var(--primary); background: #f1f5f9; width: 40%; }
+        
+        .tech-table td { font-family: monospace; font-size: 14px; color: #0369a1; }
+
+        .price-hero {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 50px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .price-hero .label { font-size: 14px; text-transform: uppercase; letter-spacing: 3px; color: #94a3b8; margin-bottom: 15px; }
+        .price-hero .total { font-family: 'Montserrat', sans-serif; font-size: 52px; font-weight: 800; color: var(--success); }
+        .price-hero .note { font-size: 15px; color: #cbd5e1; margin-top: 20px; font-style: italic; }
+
         .badge {
             display: inline-block;
-            padding: 6px 12px;
-            background: var(--secondary);
-            color: #fff;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
-            margin-right: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 10px;
         }
-        .badge.outline { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); }
-        .badge.success { background: var(--success); }
-        .badge.critical { background: var(--accent); }
 
-        .highlight { color: var(--accent); font-weight: 700; }
-        .text-success { color: var(--success); font-weight: 700; }
-        
-        ul { padding-left: 20px; margin: 10px 0; }
-        li { margin-bottom: 8px; }
-
-        /* PRICING BLOCK */
-        .kpi-block { text-align: center; background: #eff6ff; padding: 20px; border-radius: 8px; border: 1px solid #bfdbfe; }
-        .kpi-value { font-size: 32px; font-weight: 700; color: var(--primary); }
-        .kpi-label { font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* FOOTER */
-        .footer {
-            background: var(--text-dark);
-            color: #94a3b8;
+        .btn {
+            display: block;
+            width: 100%;
             text-align: center;
-            padding: 30px;
+            background-color: var(--secondary);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 22px;
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+        }
+        
+        .btn:hover { background-color: #0284c7; transform: translateY(-2px); }
+
+        .footer {
+            background: var(--bg-light);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px;
             font-size: 14px;
+            border-top: 1px solid var(--border);
         }
     </style>
 </head>
@@ -134,274 +164,167 @@
 <div class="container">
     <div class="header">
         <h1>{{ specs.part_name }}</h1>
-        <p>Complete Industrial AI Catalogue | Generated: {{ generated_date }}</p>
+        <p>Advanced Commercial Specification & Proposal &bull; Date: {{ generated_date }}</p>
     </div>
 
     <div class="content">
 
-        <!-- 1. Executive Summary -->
+        <!-- 1. EXECUTIVE HIGHLIGHTS -->
         <div class="section">
-            <h2 class="section-title">1. Executive Summary</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Overview</h4>
-                    <p>The <strong>{{ specs.part_name }}</strong> (Ref: {{ specs.part_id }}) is a highly specialized industrial unit designed for rigorous technical environments. It leverages AI-optimized supply chaining and predictive maintenance models to ensure peak operational reliability.</p>
-                </div>
-                <div class="card">
-                    <h4>Key Value Proposition</h4>
-                    <p>By securing <strong>{{ nego.winner }}</strong> as the main supplier and projecting over a {{ tco.horizon_years }}-year horizon, this deployment achieves a <strong>Total Adjusted Cost of ${{ tco.inflation_adjusted_total_usd | int }}</strong> globally, boasting an extraordinary <span class="text-success">{{ bp.financials.roi_percent }}% ROI</span>.</p>
+            <h2 class="section-title">1. Executive Highlights</h2>
+            <div class="box">
+                <ul class="points-list">
+                    {% for point in client_description_list %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong style="color: var(--primary);">Investment Grade:</strong> 
+                        <span class="badge">Certified {{ specs.material }}</span>
+                    </div>
+                    <div style="font-size: 18px; font-weight: 700; color: var(--success);">
+                        Total Value: ${{ tco.total_purchase_usd | int }}
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Product Overview -->
+        <!-- 2. STRATEGIC USE-CASES -->
         <div class="section">
-            <h2 class="section-title">2. Product Overview</h2>
-            <p><strong>Name:</strong> {{ specs.part_name }}</p>
-            <p><strong>Description:</strong> High-pressure industrial component engineered natively through {{ cad.cad_software }} generation scripts to guarantee absolute structural integrity and interoperability.</p>
-            <p><strong>Use Case:</strong> Fluid control, high-pressure environments, or continuous manufacturing lines requiring exact tolerance handling.</p>
+            <h2 class="section-title">2. Strategic Application Context</h2>
+            <div class="box">
+                <ul class="points-list">
+                    {% for point in client_explanation_list %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
 
-        <!-- 3. Technical Specifications -->
+        <!-- 3. DETAILED PERFORMANCE MATRIX -->
         <div class="section">
-            <h2 class="section-title">3. Technical Specifications</h2>
+            <h2 class="section-title">3. Detailed Performance Matrix</h2>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Certified Specification</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Substrate Material</strong></td>
+                        <td>{{ specs.material }}</td>
+                        <td>High-durability industrial grade</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nominal Diameter</strong></td>
+                        <td>{{ tech_limits.pressure }} mm</td>
+                        <td>Precision bore (+/- {{ tech_limits.tolerance }}mm)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational Pressure</strong></td>
+                        <td>{{ tech_limits.pressure }} Bar</td>
+                        <td>Maximum structural integrity rating</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Thermal Resilience</strong></td>
+                        <td>{{ tech_limits.max_temp }} °C</td>
+                        <td>Optimized for high-temp fluid control</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational Flow Rate</strong></td>
+                        <td>{{ tech_limits.flow_rate }} m³/h</td>
+                        <td>High-efficiency throughput design</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Expected Service Life</strong></td>
+                        <td>{{ tech_limits.lifespan }} Years</td>
+                        <td>Based on standard operational metrics</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. VISUAL & MEDIA ASSETS -->
+        <div class="section">
+            <h2 class="section-title">4. Visual & Media Assets</h2>
+            <div style="display: flex; gap: 20px;">
+                {% if video.files_generated %}
+                <a href="{{ video.files_generated[0] }}" style="flex: 1; display: block; background: #000; color: #fff; padding: 25px; border-radius: 10px; text-decoration: none; text-align: center; font-weight: 700;">
+                    ▶ WATCH PRODUCT VIDEO
+                </a>
+                {% endif %}
+                {% if cad.files_generated %}
+                <a href="{{ cad.files_generated[0] }}" style="flex: 1; display: block; border: 2px solid var(--primary); color: var(--primary); padding: 25px; border-radius: 10px; text-decoration: none; text-align: center; font-weight: 700;">
+                    📐 VIEW CAD BLUEPRINTS
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- 5. PRICING & LOGISTICS -->
+        <div class="section">
+            <h2 class="section-title">5. Financial & Procurement Terms</h2>
             <table>
-                <tr><th>Component ID</th><td>{{ specs.part_id }}</td></tr>
-                <tr><th>Material</th><td>{{ specs.material }}</td></tr>
-                <tr><th>Nominal Diameter</th><td>{{ specs.diameter_mm }} mm</td></tr>
-                <tr><th>Total Weight</th><td>{{ specs.weight_kg }} kg</td></tr>
-                <tr><th>Pressure Rating</th><td>{{ specs.pressure_bar }} bar</td></tr>
-                <tr><th>Tolerances</th><td>&plusmn; {{ specs.tolerance_mm }} mm</td></tr>
-                <tr><th>Max Temperature</th><td>{{ specs.temperature_max_celsius }} &deg;C</td></tr>
-                <tr><th>Max Flow Rate</th><td>{{ specs.flow_rate_m3h }} m&sup3;/h</td></tr>
+                <tr><th>Unit Price (EXW)</th><td>${{ tco.unit_cost_usd | int }}</td></tr>
+                <tr><th>Quantity Requested</th><td>{{ tco.quantity_units }} Units</td></tr>
+                <tr><th>Assumed Lead Time</th><td>{{ nego.delivery_days }} Days</td></tr>
+            </table>
+            <div class="price-hero">
+                <div class="label">Integrated Order Value</div>
+                <div class="total">${{ tco.total_purchase_usd | int }}</div>
+                <div class="note">All costs included: Raw materials, manufacturing precision, quality assurance, and global logistics.</div>
+            </div>
+        </div>
+
+        <!-- 6. PRODUCTION ROADMAP -->
+        <div class="section">
+            <h2 class="section-title">6. Production Roadmap</h2>
+            <div class="box">
+                <p><strong>Timeline:</strong> Fulfillment within <strong>{{ nego.delivery_days }} calendar days</strong> from order confirmation.</p>
+                <p>Status: <span style="font-weight: 700; color: #0369a1;">Production assigned to a certified industrial manufacturing network.</span></p>
+            </div>
+        </div>
+
+        <!-- 8. MAINTENANCE & LIFECYCLE -->
+        <div class="section">
+            <h2 class="section-title">8. Maintenance & Lifecycle</h2>
+            <table>
+                <thead>
+                    <tr><th>Activity</th><th>Schedule Range</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Visual Inspection</td><td>6 months</td><td>Standard verification</td></tr>
+                    <tr><td>Operational Service</td><td>12 months</td><td>Performance tuning</td></tr>
+                    <tr><td>Full Compliance Audit</td><td>24 months</td><td>Safety recertification</td></tr>
+                </tbody>
             </table>
         </div>
 
-        <!-- 4. CAD & Engineering Assets -->
+        <!-- 9. BUSINESS VALUE -->
         <div class="section">
-            <h2 class="section-title">4. CAD & Engineering Assets</h2>
-            <p>The engineering team has successfully compiled and tested all digital models. Formats are ready for digital integration or CNC manufacturing.</p>
-            <ul>
-                <li><strong>DXF Format:</strong> <code>{{ cad.dxf_path }}</code> &mdash; Standard 2D schematics for precise laser cutting and mapping.</li>
-                <li><strong>IFC/STEP Format:</strong> <code>{{ cad.step_path | default(cad.ifc_path) | default('valve_model.step') }}</code> &mdash; Native 3D format for Building Information Modeling (BIM) collision testing.</li>
-            </ul>
-        </div>
-
-        <!-- 5. Suppliers Analysis -->
-        <div class="section">
-            <h2 class="section-title">5. Suppliers Analysis</h2>
-            <table class="table-full">
-                <tr>
-                    <th>Rank</th>
-                    <th>Supplier Name</th>
-                    <th>Location</th>
-                    <th>Price ($/kg)</th>
-                    <th>Lead Time</th>
-                    <th>Reliability Score</th>
-                </tr>
-                {% for supplier in sourcing.top_suppliers %}
-                <tr {% if supplier.name == nego.winner %}style="background-color: #d1fae5;"{% endif %}>
-                    <td>#{{ supplier.rank }}</td>
-                    <td><strong>{{ supplier.name }}</strong></td>
-                    <td>{{ supplier.country_name }}</td>
-                    <td>${{ supplier.price_per_kg_usd }}</td>
-                    <td>{{ supplier.lead_time_days }} days</td>
-                    <td>{{ supplier.reliability_score }}/100</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-
-        <!-- 6. Negotiation Results -->
-        <div class="section">
-            <h2 class="section-title">6. Negotiation Results</h2>
-            <div class="grid-2">
-                <div>
-                    <p>The AI Agent conducted multiple negotiation rounds evaluating price, quantities, and delivery compensation. The definitive winner is <strong class="text-success">{{ nego.winner }} ({{ nego.winner_country }})</strong>.</p>
-                    <ul>
-                        <li><strong>Initial Price:</strong> ${{ nego.initial_price_per_kg }} / kg</li>
-                        <li><strong>Final Negotiated Price:</strong> <span class="text-success">${{ nego.final_price_per_kg }}</span> / kg</li>
-                        <li><strong>Total Discount:</strong> {{ nego.discount_percent }}%</li>
-                        <li><strong>Contract Delivery Time:</strong> {{ nego.delivery_days }} days</li>
-                    </ul>
-                </div>
-                <div class="kpi-block">
-                    <div class="kpi-label">Final Volume Contract</div>
-                    <div class="kpi-value">{{ nego.contract_quantity_kg }} kg</div>
-                    <div class="kpi-label" style="margin-top: 10px;">Cost of Materials</div>
-                    <div class="kpi-value" style="font-size:24px;">${{ nego.total_material_cost_usd | int }}</div>
-                </div>
-            </div>
-            <br>
-            <p><strong>Supplier Choice Justification:</strong> The selected supplier achieved the highest overall efficiency score. The AI negotiated a substantial discount while locking down a secure and verifiable shipping schedule suited perfectly to local constraints.</p>
-        </div>
-
-        <!-- 7. Cost Analysis (TCO) -->
-        <div class="section">
-            <h2 class="section-title">7. Cost Analysis (TCO - {{ tco.horizon_years }} Years)</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <h4>Direct Procurement</h4>
-                    <table>
-                        <tr><th>Quantity</th><td>{{ tco.quantity_units }} units</td></tr>
-                        <tr><th>Unit Cost</th><td>${{ tco.unit_cost_usd }}</td></tr>
-                        <tr><th>Purchase Total</th><td>${{ tco.total_purchase_usd | int }}</td></tr>
-                    </table>
-                </div>
-                <div class="card">
-                    <h4>Lifetime Operations</h4>
-                    <table>
-                        <tr><th>Maintenances ({{ tco.horizon_years }}y)</th><td>${{ tco.maintenance_10y_usd | int }}</td></tr>
-                        <tr><th>Energy Usage ({{ tco.horizon_years }}y)</th><td>${{ tco.energy_10y_usd | int }}</td></tr>
-                        <tr><th>Inflation Rate</th><td>{{ tco.inflation_rate_dz_percent }}%</td></tr>
-                    </table>
-                </div>
-            </div>
-            <div class="kpi-block" style="margin-top: 20px;">
-                <div class="kpi-label">Inflation Adjusted Total Cost of Ownership (USD)</div>
-                <div class="kpi-value">${{ tco.inflation_adjusted_total_usd | int }}</div>
+            <h2 class="section-title">9. Strategic Business Value</h2>
+            <div class="box" style="border-left: 5px solid var(--success);">
+                <ul class="points-list">
+                    {% for point in client_value_list %}
+                    <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 
-        <!-- 8. Business Plan -->
-        <div class="section">
-            <h2 class="section-title">8. Business Plan</h2>
-            <div class="grid-4" style="margin-bottom: 20px;">
-                <div class="card" style="text-align:center;">
-                    <h4 style="border:none;">ROI</h4>
-                    <div class="text-success" style="font-size:20px; font-weight:700;">{{ bp.financials.roi_percent }}%</div>
-                </div>
-                <div class="card" style="text-align:center;">
-                    <h4 style="border:none;">NPV</h4>
-                    <div style="font-size:20px; font-weight:700;">${{ bp.financials.npv_usd | int }}</div>
-                </div>
-                <div class="card" style="text-align:center;">
-                    <h4 style="border:none;">Break Even</h4>
-                    <div style="font-size:20px; font-weight:700;">{{ bp.financials.break_even_months }} mo</div>
-                </div>
-                <div class="card" style="text-align:center;">
-                    <h4 style="border:none;">Y1 Margin</h4>
-                    <div style="font-size:20px; font-weight:700;">{{ bp.financials.margin_percent_year1 }}%</div>
-                </div>
-            </div>
-
-            <h4>3-Year Financial Projections</h4>
-            <table class="table-full">
-                <tr><th>Year</th><th>Gross Revenue</th><th>Operating Costs</th><th>Net Profit</th></tr>
-                <tr><td>Year 1</td><td>${{ bp.financials.revenue_year1_usd | int }}</td><td>${{ bp.financials.costs_year1_usd | int }}</td><td><strong>${{ bp.financials.profit_year1_usd | int }}</strong></td></tr>
-                <tr><td>Year 2</td><td>${{ bp.financials.revenue_year2_usd | int }}</td><td>${{ bp.financials.costs_year2_usd | int }}</td><td><strong>${{ bp.financials.profit_year2_usd | int }}</strong></td></tr>
-                <tr><td>Year 3</td><td>${{ bp.financials.revenue_year3_usd | int }}</td><td>${{ bp.financials.costs_year3_usd | int }}</td><td><strong>${{ bp.financials.profit_year3_usd | int }}</strong></td></tr>
-            </table>
-
-            <h4>SWOT Analysis</h4>
-            <div class="grid-2">
-                <div style="background:#f0fdf4; padding:15px; border-radius:8px; border:1px solid #bbf7d0;">
-                    <strong style="color:#16a34a;">STRENGTHS</strong>
-                    <ul style="margin:5px 0;">
-                        {% for item in bp.swot.strengths %}<li>{{ item }}</li>{% endfor %}
-                    </ul>
-                </div>
-                <div style="background:#fef2f2; padding:15px; border-radius:8px; border:1px solid #fecaca;">
-                    <strong style="color:#dc2626;">WEAKNESSES</strong>
-                    <ul style="margin:5px 0;">
-                        {% for item in bp.swot.weaknesses %}<li>{{ item }}</li>{% endfor %}
-                    </ul>
-                </div>
-                <div style="background:#eff6ff; padding:15px; border-radius:8px; border:1px solid #bfdbfe;">
-                    <strong style="color:#2563eb;">OPPORTUNITIES</strong>
-                    <ul style="margin:5px 0;">
-                        {% for item in bp.swot.opportunities %}<li>{{ item }}</li>{% endfor %}
-                    </ul>
-                </div>
-                <div style="background:#fffbeb; padding:15px; border-radius:8px; border:1px solid #fde68a;">
-                    <strong style="color:#d97706;">THREATS</strong>
-                    <ul style="margin:5px 0;">
-                        {% for item in bp.swot.threats %}<li>{{ item }}</li>{% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- 9. Production Plan -->
-        <div class="section">
-            <h2 class="section-title">9. Production Plan</h2>
-            <p><strong>Estimated Timeline:</strong> Execution based on supplier lead times ({{ nego.delivery_days }} days).</p>
-            <ul>
-                <li><strong>Phase 1: Raw Material Import</strong> — Dispatching orders to {{ nego.winner }} & Custom clearance.</li>
-                <li><strong>Phase 2: CNC Machining & Casing</strong> — Shaping the {{ specs.material }} framework.</li>
-                <li><strong>Phase 3: QA & Testing</strong> — Pressurizing to {{ specs.pressure_bar }} bar to confirm &plusmn; {{ specs.tolerance_mm }} mm tolerances.</li>
-                <li><strong>Phase 4: Site Deployment</strong> — Final integration onto industrial pipelines.</li>
-            </ul>
-        </div>
-
-        <!-- 10. Digital Twin & Maintenance -->
-        <div class="section">
-            <h2 class="section-title">10. Digital Twin & Predictive Maintenance</h2>
-            <div class="card">
-                <div class="grid-2">
-                    <div>
-                        <p><strong>System Status:</strong> <span class="badge success">Active Monitoring</span></p>
-                        <p><strong>Final Health Score:</strong> <span class="text-success" style="font-size:24px;">{{ twin.health_score_final }}%</span></p>
-                        <p><strong>Estimated Usable Lifespan:</strong> {{ twin.estimated_lifespan_years }} Years.</p>
-                    </div>
-                    <div>
-                        <p><strong>Next Maintenance Trigger:</strong> <br><span class="highlight">{{ twin.predicted_maintenance_date }}</span></p>
-                        <p><strong>Critical Failure Horizon:</strong> <br><span class="highlight">{{ twin.predicted_failure_date }}</span></p>
-                    </div>
-                </div>
-            </div>
-            
-            {% if twin.alerts|length > 0 %}
-            <h4 style="margin-top:20px;">Detected Anomalies (Simulated Sensor Engine)</h4>
-            <table class="table-full">
-                <tr><th>Time</th><th>Severity</th><th>Metric</th><th>Peak</th><th>Mitigation</th></tr>
-                {% for alert in twin.alerts %}
-                <tr>
-                    <td>{{ alert.date }}</td>
-                    <td>
-                        {% if alert.severity == 'critical' %}
-                        <span class="badge critical">CRITICAL</span>
-                        {% else %}
-                        <span class="badge" style="background:#f59e0b;">WARNING</span>
-                        {% endif %}
-                    </td>
-                    <td>{{ alert.type }}</td>
-                    <td>{{ alert.value }} (vs {{ alert.threshold }})</td>
-                    <td><em>{{ alert.recommended_action }}</em></td>
-                </tr>
-                {% endfor %}
-            </table>
-            {% endif %}
-        </div>
-
-        <!-- 11. Media -->
-        <div class="section">
-            <h2 class="section-title">11. Media & Renders</h2>
-            <div style="background:#f8fafc; padding:20px; border-radius:8px; border:1px solid var(--border); text-align:center;">
-                <p>Digital previews are available within the secure workspace.</p>
-                <a href="{{ video.video_path | default('#') }}" style="display:inline-block; padding:12px 24px; background:var(--secondary); color:#fff; text-decoration:none; border-radius:6px; font-weight:600; margin:10px;">
-                    👁️ Watch Generated Video Presentation
-                </a>
-                <a href="#" style="display:inline-block; padding:12px 24px; background:var(--primary); color:#fff; text-decoration:none; border-radius:6px; font-weight:600; margin:10px;">
-                    🧊 View 3D Digital Twin Viewer
-                </a>
-            </div>
-        </div>
-
-        <!-- 12. Conclusion -->
-        <div class="section">
-            <h2 class="section-title">12. Executive Conclusion</h2>
-            <p><strong>Final Recommendation:</strong> The orchestration pipeline confirms feasibility. It is strongly advised to proceed with establishing the contract with <strong>{{ nego.winner }}</strong> to source the material.</p>
-            <p><strong>System Profitability:</strong> Producing this unit generates a {{ bp.financials.margin_percent_year1 }}% operational margin in Year 1. Integrating the Digital Twin sensor net drastically reduces total life-cycle costs via predictive mitigation.</p>
-            <div style="background:var(--success); color:#fff; padding:15px; border-radius:8px; text-align:center; font-weight:600; font-size:18px; margin-top:20px;">
-                STATUS: APPROVED FOR DEPLOYMENT (INDUSTRIE IA)
-            </div>
+        <!-- 10. NEXT ACTION -->
+        <div class="section" style="margin-top: 60px;">
+            <a href="#" class="btn">Validate Proposal & Initiate Production</a>
         </div>
 
     </div>
     
     <div class="footer">
-        Generated autonomously by <strong>INDUSTRIE IA</strong> — Local Agentic Pipeline.
+        Confidential Document &bull; Smart Engineering Intelligence by INDUSTRIE IA
     </div>
 </div>
 
